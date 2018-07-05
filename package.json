@@ -64,12 +64,13 @@
     "test:coverage": "npm run test -- --coverage --collectCoverageFrom=src/**/*.js --collectCoverageFrom=!src/index.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "classnames": "^2.2.5",
     "moment": "^2.18.1",
     "react-icons": "^2.2.5",
-    "react-progress-bar.js": "^0.2.3",
-    "react-spinkit": "^3.0.0",
     "react-native-icons": "^0.7.1",
-    "react-native-vector-icons": "^4.4.2"
+    "react-native-vector-icons": "^4.4.2",
+    "react-progress-bar.js": "^0.2.3",
+    "react-spinkit": "^3.0.0"
   }
 }

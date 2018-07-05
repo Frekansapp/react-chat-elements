@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import './MessageBox.css';
 
 import PhotoMessage from '../PhotoMessage/PhotoMessage';
@@ -15,14 +15,33 @@ import FaReply from 'react-icons/lib/fa/mail-reply';
 import IoDoneAll from 'react-icons/lib/io/android-done-all';
 import MdIosTime from 'react-icons/lib/md/access-time';
 import MdCheck from 'react-icons/lib/md/check';
+import LinkMessage from "../LinkMessage/LinkMessage";
 
 const moment = require('moment');
 
 const classNames = require('classnames');
 
 export class MessageBox extends Component {
+    analyzeMessage() {
+        // regex string message for link url
+        let regex = new RegExp('(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#/%=~_|$?!:,.]*\)|[A-Z0-9+&@#/%=~_|$])', 'igm');
+        let result = regex.exec(this.props.text);
+        if (!result) {
+            return (
+                <div className="rce-mbox-text">
+                    {this.props.text}
+                </div>
+            )
+        } else {
+            let link = result[0];
+            return (
+                <LinkMessage text={this.props.text} link={link}/>
+            )
+        }
+    }
+
     render() {
-        var positionCls = classNames('rce-mbox', { 'rce-mbox-right': this.props.position === 'right' });
+        var positionCls = classNames('rce-mbox', {'rce-mbox-right': this.props.position === 'right'});
         var thatAbsoluteTime = this.props.type !== 'text' && this.props.type !== 'file' && !(this.props.type === 'location' && this.props.text);
 
 
@@ -42,7 +61,7 @@ export class MessageBox extends Component {
                 {
                     this.props.type === 'system' ?
                         <SystemMessage
-                            text={this.props.text} />
+                            text={this.props.text}/>
                         :
                         <div
                             className={classNames(
@@ -56,18 +75,18 @@ export class MessageBox extends Component {
                                     <div
                                         className={classNames(
                                             'rce-mbox-forward',
-                                            { 'rce-mbox-forward-right': this.props.position === 'left' },
-                                            { 'rce-mbox-forward-left': this.props.position === 'right' }
+                                            {'rce-mbox-forward-right': this.props.position === 'left'},
+                                            {'rce-mbox-forward-left': this.props.position === 'right'}
                                         )}
                                         onClick={this.props.onForwardClick}>
-                                            <FaForward />
+                                        <FaForward/>
                                     </div>
                                 }
 
                                 {
                                     (this.props.title || this.props.avatar) &&
                                     <div
-                                        style={this.props.titleColor && { color: this.props.titleColor }}
+                                        style={this.props.titleColor && {color: this.props.titleColor}}
                                         onClick={this.props.onTitleClick}
                                         className={classNames('rce-mbox-title', {
                                             'rce-mbox-title--clear': this.props.type === 'text',
@@ -85,10 +104,7 @@ export class MessageBox extends Component {
                                 }
 
                                 {
-                                    this.props.type === 'text' &&
-                                    <div className="rce-mbox-text">
-                                        {this.props.text}
-                                    </div>
+                                    this.props.type === 'text' && this.analyzeMessage()
                                 }
 
                                 {
@@ -102,7 +118,7 @@ export class MessageBox extends Component {
                                         src={this.props.src}
                                         zoom={this.props.zoom}
                                         markerColor={this.props.markerColor}
-                                        text={this.props.text} />
+                                        text={this.props.text}/>
                                 }
 
                                 {
@@ -113,7 +129,7 @@ export class MessageBox extends Component {
                                         data={this.props.data}
                                         width={this.props.width}
                                         height={this.props.height}
-                                        text={this.props.text} />
+                                        text={this.props.text}/>
                                 }
 
                                 {
@@ -122,7 +138,7 @@ export class MessageBox extends Component {
                                         onOpen={this.props.onOpen}
                                         onDownload={this.props.onDownload}
                                         data={this.props.data}
-                                        text={this.props.text} />
+                                        text={this.props.text}/>
                                 }
 
                                 {
@@ -133,14 +149,14 @@ export class MessageBox extends Component {
                                         theme={this.props.theme}
                                         view={this.props.view}
                                         data={this.props.data}
-                                        uri={this.props.uri || this.props.text} />
+                                        uri={this.props.uri || this.props.text}/>
                                 }
 
                                 <div
                                     className={classNames(
                                         'rce-mbox-time',
-                                        { 'rce-mbox-time-block': thatAbsoluteTime },
-                                        { 'non-copiable': !this.props.copiableDate },
+                                        {'rce-mbox-time-block': thatAbsoluteTime},
+                                        {'non-copiable': !this.props.copiableDate},
                                     )}
                                     data-text={this.props.copiableDate ? undefined : dateText}>
                                     {
@@ -157,17 +173,17 @@ export class MessageBox extends Component {
                                         <span className='rce-mbox-status'>
                                             {
                                                 this.props.status === 'waiting' &&
-                                                <MdIosTime />
+                                                <MdIosTime/>
                                             }
 
                                             {
                                                 this.props.status === 'sent' &&
-                                                <MdCheck />
+                                                <MdCheck/>
                                             }
 
                                             {
                                                 this.props.status === 'received' &&
-                                                <IoDoneAll />
+                                                <IoDoneAll/>
                                             }
 
                                             {
@@ -182,22 +198,24 @@ export class MessageBox extends Component {
                             {
                                 this.props.notch &&
                                 (this.props.position === 'right' ?
-                                    <svg className="rce-mbox-right-notch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M0 0v20L20 0" />
-                                    </svg>
-                                    :
-                                    <div>
-                                        <svg className="rce-mbox-left-notch" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <defs>
-                                                <filter id="filter1" x="0" y="0">
-                                                    <feOffset result="offOut" in="SourceAlpha" dx="-2" dy="-5" />
-                                                    <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
-                                                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                                                </filter>
-                                            </defs>
-                                            <path d="M20 0v20L0 0" filter="url(#filter1)" />
+                                        <svg className="rce-mbox-right-notch" xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 20 20">
+                                            <path d="M0 0v20L20 0"/>
                                         </svg>
-                                    </div>
+                                        :
+                                        <div>
+                                            <svg className="rce-mbox-left-notch" xmlns="http://www.w3.org/2000/svg"
+                                                 viewBox="0 0 20 20">
+                                                <defs>
+                                                    <filter id="filter1" x="0" y="0">
+                                                        <feOffset result="offOut" in="SourceAlpha" dx="-2" dy="-5"/>
+                                                        <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3"/>
+                                                        <feBlend in="SourceGraphic" in2="blurOut" mode="normal"/>
+                                                    </filter>
+                                                </defs>
+                                                <path d="M20 0v20L0 0" filter="url(#filter1)"/>
+                                            </svg>
+                                        </div>
                                 )
                             }
                         </div>
