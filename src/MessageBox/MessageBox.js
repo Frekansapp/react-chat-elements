@@ -16,6 +16,7 @@ import IoDoneAll from 'react-icons/lib/io/android-done-all';
 import MdIosTime from 'react-icons/lib/md/access-time';
 import MdCheck from 'react-icons/lib/md/check';
 import LinkMessage from "../LinkMessage/LinkMessage";
+import Emoji from 'react-emoji-render'
 
 const moment = require('moment');
 
@@ -29,7 +30,8 @@ export class MessageBox extends Component {
         if (!result) {
             return (
                 <div className="rce-mbox-text">
-                    {this.props.text}
+                    <Emoji text={this.props.text}/>
+
                 </div>
             )
         } else {
@@ -98,7 +100,7 @@ export class MessageBox extends Component {
                                         }
                                         {
                                             this.props.title &&
-                                            <span>{this.props.title}</span>
+                                            <span><Emoji text={this.props.title}/></span>
                                         }
                                     </div>
                                 }

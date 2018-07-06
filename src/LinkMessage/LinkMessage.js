@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import  './LinkMessage.css';
 const classNames = require('classnames');
 import axios from 'axios';
+import Emoji from 'react-emoji-render';
 
 class LinkMessage extends Component {
     constructor(props){
@@ -39,10 +40,10 @@ class LinkMessage extends Component {
         let result =[];
         for(let i =0;i<arr.length;i++){
             if(i<arr.length-1) {
-                result.push(arr[i]);
-                result.push(<a href={this.props.link} target={this.props.target}>{this.props.link}</a>);
+                result.push(<Emoji key={i} text={arr[i]}/>);
+                result.push(<a key={i+'C'} href={this.props.link} target={this.props.target}>{this.props.link}</a>);
             } else {
-                result.push(arr[i]);
+                result.push(<Emoji key={i} text={arr[i]}/>);
             }
         }
         return result;

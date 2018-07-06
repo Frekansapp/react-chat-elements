@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './ChatList.css';
-
 import ChatItem from '../ChatItem/ChatItem';
 
 const classNames = require('classnames');

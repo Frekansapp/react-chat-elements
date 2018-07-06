@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Emoji from 'react-emoji-render';
 import './SystemMessage.css';
 
 const classNames = require('classnames');
@@ -10,7 +11,8 @@ export class SystemMessage extends Component {
                 <div
                     className='rce-smsg'>
                     <div className="rce-smsg-text">
-                        {this.props.text}
+                        <Emoji text={this.props.text}/>
+
                     </div>
                 </div>
             </div>

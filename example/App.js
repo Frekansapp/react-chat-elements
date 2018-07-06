@@ -96,7 +96,7 @@ export class App extends Component {
                     view: 'list',
                     title: loremIpsum({ count: 2, units: 'words' }),
                     titleColor: this.getRandomColor(),
-                    text: type === 'spotify' ? 'spotify:track:7wGoVu4Dady5GV0Sv4UIsx' : loremIpsum({ count: 1, units: 'sentences' }),
+                    text: type === 'spotify' ? 'spotify:track:7wGoVu4Dady5GV0Sv4UIsx' : loremIpsum({ count: 1, units: 'sentences' })+'https://inet.vn <3  :(',
                     data: {
                         uri: `data:image/png;base64,${this.photo(150)}`,
                         status: {

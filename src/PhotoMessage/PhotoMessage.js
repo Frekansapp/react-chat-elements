@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import Emoji from 'react-emoji-render';
 import './PhotoMessage.css';
 
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
@@ -62,7 +62,8 @@ export class PhotoMessage extends Component {
                 {
                     this.props.text &&
                     <div className="rce-mbox-text">
-                        {this.props.text}
+                        <Emoji text={this.props.text}/>
+
                     </div>
                 }
             </div>

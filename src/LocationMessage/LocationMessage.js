@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './LocationMessage.css';
-
+import Emoji from 'react-emoji-render';
 const classNames = require('classnames');
 
 const STATIC_URL = 'https://maps.googleapis.com/maps/api/staticmap?markers=color:MARKER_COLOR|LATITUDE,LONGITUDE&zoom=ZOOM&size=270x200&scale=2&key=KEY';
@@ -50,7 +50,8 @@ export class LocationMessage extends Component {
                 {
                     this.props.text &&
                     <div className="rce-mbox-text rce-mbox-location-text">
-                        {this.props.text}
+                        <Emoji text={this.props.text}/>
+
                     </div>
                 }
             </div>

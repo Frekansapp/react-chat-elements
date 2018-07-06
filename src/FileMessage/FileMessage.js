@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './FileMessage.css';
+import Emoji from 'react-emoji-render';
 
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
 import FaFile from 'react-icons/lib/fa/file';
@@ -48,7 +49,7 @@ export class FileMessage extends Component {
                         </div>
                     </div>
                     <div className="rce-mbox-file--text">
-                        {this.props.text}
+                        <Emoji text={this.props.text}/>
                     </div>
                     <div className="rce-mbox-file--buttons">
                         {
