@@ -42,13 +42,13 @@ export class PhotoMessage extends Component {
                         alt={this.props.data.alt}
                         onClick={this.props.onOpen}
                         onLoad={this.props.onLoad}
-                        onError={this.props.onPhotoError}/>
+                        onError={this.props.onPhotoError} />
                     {
                         error &&
                         <div className="rce-mbox-photo--img__block">
                             <span
                                 className="rce-mbox-photo--img__block-item rce-mbox-photo--error">
-                                <FaError/>
+                                <FaError />
                             </span>
                         </div>
                     }
@@ -62,7 +62,7 @@ export class PhotoMessage extends Component {
                                 <button
                                     onClick={this.props.onDownload}
                                     className="rce-mbox-photo--img__block-item rce-mbox-photo--download">
-                                    <FaCloudDownload/>
+                                    <FaCloudDownload />
                                 </button>
                             }
                             {
@@ -80,7 +80,7 @@ export class PhotoMessage extends Component {
                 {
                     this.props.text &&
                     <div className="rce-mbox-text">
-                        {this.props.text}
+                        {this.props.text}<br />
                     </div>
                 }
             </div>

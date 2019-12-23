@@ -10,6 +10,10 @@
     margin: auto;
 }
 
+.rce-mbox-text {
+    margin-left: 5px;
+}
+
 .rce-mbox-photo--img {
     position: relative;
     display: flex;
