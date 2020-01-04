@@ -6,6 +6,7 @@ import FileMessage from '../FileMessage/FileMessage';
 import SystemMessage from '../SystemMessage/SystemMessage';
 import LocationMessage from '../LocationMessage/LocationMessage';
 import SpotifyMessage from '../SpotifyMessage/SpotifyMessage';
+import AudioMessage from '../AudioMessage/AudioMessage';
 
 import Avatar from '../Avatar/Avatar';
 
@@ -63,9 +64,9 @@ export class MessageBox extends Component {
                         <div
                             className={classNames(
                                 positionCls,
-                                {'rce-mbox--clear-padding': thatAbsoluteTime},
-                                {'rce-mbox--clear-notch': !this.props.notch},
-                                { 'message-focus': this.props.focus},
+                                { 'rce-mbox--clear-padding': thatAbsoluteTime },
+                                { 'rce-mbox--clear-notch': !this.props.notch },
+                                { 'message-focus': this.props.focus },
                             )}>
                             <div
                                 className='rce-mbox-body'
@@ -79,7 +80,7 @@ export class MessageBox extends Component {
                                             { 'rce-mbox-forward-left': this.props.position === 'right' }
                                         )}
                                         onClick={this.props.onForwardClick}>
-                                            <FaForward />
+                                        <FaForward />
                                     </div>
                                 }
 
@@ -94,7 +95,7 @@ export class MessageBox extends Component {
                                         {
                                             this.props.avatar &&
                                             <Avatar
-                                                src={this.props.avatar}/>
+                                                src={this.props.avatar} />
                                         }
                                         {
                                             this.props.title &&
@@ -109,7 +110,6 @@ export class MessageBox extends Component {
                                         {this.props.text}
                                     </div>
                                 }
-
                                 {
                                     this.props.type === 'location' &&
                                     <LocationMessage
@@ -123,7 +123,6 @@ export class MessageBox extends Component {
                                         markerColor={this.props.markerColor}
                                         text={this.props.text} />
                                 }
-
                                 {
                                     this.props.type === 'photo' &&
                                     <PhotoMessage
@@ -136,7 +135,6 @@ export class MessageBox extends Component {
                                         height={this.props.height}
                                         text={this.props.text} />
                                 }
-
                                 {
                                     this.props.type === 'file' &&
                                     <FileMessage
@@ -145,7 +143,6 @@ export class MessageBox extends Component {
                                         data={this.props.data}
                                         text={this.props.text} />
                                 }
-
                                 {
                                     this.props.type === 'spotify' &&
                                     <SpotifyMessage
@@ -156,7 +153,12 @@ export class MessageBox extends Component {
                                         data={this.props.data}
                                         uri={this.props.uri || this.props.text} />
                                 }
-
+                                {
+                                    this.props.type === 'audio' &&
+                                    <AudioMessage
+                                        text={this.props.text}
+                                        data={this.props.data} />
+                                }
                                 <div
                                     className={classNames(
                                         'rce-mbox-time',
@@ -193,7 +195,7 @@ export class MessageBox extends Component {
 
                                             {
                                                 this.props.status === 'read' &&
-                                                <IoDoneAll color='#4FC3F7'/>
+                                                <IoDoneAll color='#4FC3F7' />
                                             }
                                         </span>
                                     }
@@ -205,16 +207,16 @@ export class MessageBox extends Component {
                                 (this.props.position === 'right' ?
                                     <svg className={classNames(
                                         "rce-mbox-right-notch",
-                                        { 'message-focus': this.props.focus},
+                                        { 'message-focus': this.props.focus },
                                     )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                         <path d="M0 0v20L20 0" />
                                     </svg>
                                     :
                                     <div>
                                         <svg className={classNames(
-                                                "rce-mbox-left-notch",
-                                                { 'message-focus': this.props.focus},
-                                            )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            "rce-mbox-left-notch",
+                                            { 'message-focus': this.props.focus },
+                                        )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                                             <defs>
                                                 <filter id="filter1" x="0" y="0">
                                                     <feOffset result="offOut" in="SourceAlpha" dx="-2" dy="-5" />

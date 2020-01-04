@@ -86,6 +86,10 @@ export class App extends Component {
                     case 4:
                         type = 'spotify';
                         break;
+                    case 5:
+                        type = 'audio';
+                        status = 'sent';
+                        break;
                     default:
                         type = 'text';
                         status = 'read';
@@ -100,14 +104,14 @@ export class App extends Component {
                     view: 'list',
                     title: loremIpsum({ count: 2, units: 'words' }),
                     titleColor: this.getRandomColor(),
-                    text: type === 'spotify' ? 'spotify:track:7wGoVu4Dady5GV0Sv4UIsx' : loremIpsum({ count: 1, units: 'sentences' }),
+                    text: type === 'spotify' ? 'spotify:track:7wGoVu4Dady5GV0Sv4UIsx' : loremIpsum({ count: 5, units: 'sentences' }),
                     data: {
-                        uri: `data:image/png;base64,${this.photo(150)}`,
+                        size: type === 'audio' ? '10 sec' : '100MB',
+                        uri: type === 'audio' ? "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" : `data:image/png;base64,${this.photo(150)}`,
                         status: {
                             click: true,
                             loading: .5,
                         },
-                        size: "100MB",
                         width: 300,
                         height: 300,
                         latitude: '37.773972',
@@ -157,7 +161,7 @@ export class App extends Component {
                                 },
                                 {
                                     icon: {
-                                        component: <FaSquare/>,
+                                        component: <FaSquare />,
                                         float: 'left',
                                         color: 'purple',
                                         size: 22,
@@ -166,7 +170,7 @@ export class App extends Component {
                                 },
                                 {
                                     icon: {
-                                        component: <FaSquare/>,
+                                        component: <FaSquare />,
                                         float: 'left',
                                         color: 'yellow',
                                         size: 22,
@@ -255,7 +259,7 @@ export class App extends Component {
                         className='message-list'
                         lockable={false}
                         loadMoreButton={true}
-                        onLoadMoreClick={()=>console.log('Load-More Button Clicked')}
+                        onLoadMoreClick={() => console.log('Load-More Button Clicked')}
                         downButtonBadge={10}
                         dataSource={this.state.messageList} />
                     <Input
