@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import './PhotoMessage.css';
 
+import ModalImage from 'react-modal-image'
 import FaCloudDownload from 'react-icons/lib/fa/cloud-download';
 import FaError from 'react-icons/lib/fa/exclamation-triangle';
 
@@ -37,12 +38,20 @@ export class PhotoMessage extends Component {
                         width: this.props.data.width,
                         height: this.props.data.height,
                     }}>
-                    <img
+                    <ModalImage
+                        hideDownload={true}
+                        hideZoom={false}
+                        showRotate={true}
+                        //className={this.props.avatar ? 'avatar-image' : undefined}
+                        alt={this.props.data.alt || 'photo message'}
+                        small={this.props.data.uri}
+                        large={this.props.data.uri} />
+                    {/*<img
                         src={this.props.data.uri}
                         alt={this.props.data.alt}
                         onClick={this.props.onOpen}
                         onLoad={this.props.onLoad}
-                        onError={this.props.onPhotoError} />
+                    onError={this.props.onPhotoError} />*/}
                     {
                         error &&
                         <div className="rce-mbox-photo--img__block">

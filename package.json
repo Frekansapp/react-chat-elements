@@ -65,6 +65,7 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "react-icons": "^2.2.5",
+    "react-modal-image": "^2.5.0",
     "react-native-icons": "^0.7.1",
     "react-native-vector-icons": "^4.4.2",
     "react-progress-bar.js": "^0.2.3",

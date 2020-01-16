@@ -108,10 +108,6 @@ export class App extends Component {
                     data: {
                         size: type === 'audio' ? '10 sec' : '100MB',
                         uri: type === 'audio' ? "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3" : `data:image/png;base64,${this.photo(150)}`,
-                        status: {
-                            click: true,
-                            loading: .5,
-                        },
                         width: 300,
                         height: 300,
                         latitude: '37.773972',
