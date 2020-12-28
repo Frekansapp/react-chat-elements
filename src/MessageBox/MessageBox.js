@@ -52,6 +52,8 @@ export class MessageBox extends React.PureComponent {
             <div
                 ref='message'
                 className={classNames('rce-container-mbox', this.props.className)}
+                style={this.props.style ? this.props.style : {}}
+                // key={this.props.key}
                 onClick={this.props.onClick}>
                 {
                     this.props.renderAddCmp instanceof Function &&
@@ -262,31 +264,31 @@ export class MessageBox extends React.PureComponent {
                             </div>
 
                             {
-                                this.props.notch &&
-                                (this.props.position === 'right' ?
-                                    <svg className={classNames(
-                                        "rce-mbox-right-notch",
-                                        { 'message-focus': this.props.focus},
-                                    )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path d="M0 0v20L20 0" />
-                                    </svg>
-                                    :
-                                    <div>
-                                        <svg className={classNames(
-                                                "rce-mbox-left-notch",
-                                                { 'message-focus': this.props.focus},
-                                            )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                            <defs>
-                                                <filter id="filter1" x="0" y="0">
-                                                    <feOffset result="offOut" in="SourceAlpha" dx="-2" dy="-5" />
-                                                    <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
-                                                    <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
-                                                </filter>
-                                            </defs>
-                                            <path d="M20 0v20L0 0" filter="url(#filter1)" />
-                                        </svg>
-                                    </div>
-                                )
+                                // this.props.notch &&
+                                // (this.props.position === 'right' ?
+                                //     <svg className={classNames(
+                                //         "rce-mbox-right-notch",
+                                //         { 'message-focus': this.props.focus},
+                                //     )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                //         <path d="M0 0v20L20 0" />
+                                //     </svg>
+                                //     :
+                                //     <div>
+                                //         <svg className={classNames(
+                                //                 "rce-mbox-left-notch",
+                                //                 { 'message-focus': this.props.focus},
+                                //             )} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                //             <defs>
+                                //                 <filter id="filter1" x="0" y="0">
+                                //                     <feOffset result="offOut" in="SourceAlpha" dx="-2" dy="-5" />
+                                //                     <feGaussianBlur result="blurOut" in="offOut" stdDeviation="3" />
+                                //                     <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+                                //                 </filter>
+                                //             </defs>
+                                //             <path d="M20 0v20L0 0" filter="url(#filter1)" />
+                                //         </svg>
+                                //     </div>
+                                // )
                             }
                         </div>
                 }
