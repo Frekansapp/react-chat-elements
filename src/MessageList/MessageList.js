@@ -4,8 +4,34 @@ import './MessageList.css';
 import MessageBox from '../MessageBox/MessageBox';
 
 import FaChevronDown from 'react-icons/lib/fa/chevron-down';
+// import { FixedSizeList as List } from "react-window";
+import AutoSizer from "react-virtualized-auto-sizer";
+// @ts-ignore
+import DynamicList, {createCache} from "react-window-dynamic-list";
+import {
+    CellMeasurer,
+    CellMeasurerCache,
+    createMasonryCellPositioner,
+    Masonry,
+  } from 'react-virtualized';
+  
 
 const classNames = require('classnames');
+
+// const cache = createCache();
+
+const cache = new CellMeasurerCache({
+    defaultHeight: 250,
+    defaultWidth: 200,
+    fixedWidth: false,
+  });
+  
+  const cellPositioner = createMasonryCellPositioner({
+    cellMeasurerCache: cache,
+    columnCount: 1,
+    columnWidth: "100%",
+    spacer: 10,
+  });
 
 export class MessageList extends Component {
 
@@ -18,6 +44,7 @@ export class MessageList extends Component {
 
         this.loadRef = this.loadRef.bind(this);
         this.onScroll = this.onScroll.bind(this);
+        this.listRef = React.createRef();
     }
 
     checkScroll() {
@@ -150,6 +177,39 @@ export class MessageList extends Component {
             this.props.onMeetingMoreSelect(item, i, e);
     }
 
+    Row = (e) => {
+        console.log(e)
+        const {index, style, key, parent} = e;
+        const x = this.props.dataSource[index];
+        const i = index;
+        const content = 
+        <CellMeasurer cache={cache} index={index} key={key} parent={parent}>
+                <div style={style}>
+                {/* /* {isScrolling ? (
+                    <></>
+                    ) :  */}
+                    <MessageBox
+                        {...x}
+                        onOpen={this.props.onOpen && ((e) => this.onOpen(x, i, e))}
+                        onPhotoError={this.props.onPhotoError && ((e) => this.onPhotoError(x, i, e))}
+                        onDownload={this.props.onDownload && ((e) => this.onDownload(x, i, e))}
+                        onTitleClick={this.props.onTitleClick && ((e) => this.onTitleClick(x, i, e))}
+                        onForwardClick={this.props.onForwardClick && ((e) => this.onForwardClick(x, i, e))}
+                        onReplyClick={this.props.onReplyClick && ((e) => this.onReplyClick(x, i, e))}
+                        onReplyMessageClick={this.props.onReplyMessageClick && ((e) => this.onReplyMessageClick(x, i, e))}
+                        onClick={this.props.onClick && ((e) => this.onClick(x, i, e))}
+                        onContextMenu={this.props.onContextMenu && ((e) => this.onContextMenu(x, i, e))}
+                        onMeetingMoreSelect={this.props.onMeetingMoreSelect && ((e) => this.onMeetingMoreSelect(x, i, e))}
+                        onMessageFocused={this.props.onMessageFocused && ((e) => this.onMessageFocused(x, i, e))}
+                        onMeetingMessageClick={this.props.onMeetingMessageClick && ((e) => this.onMeetingMessageClick(x, i, e))}
+                        onMeetingTitleClick={this.props.onMeetingTitleClick}
+                        onMeetingVideoLinkClick={this.props.onMeetingVideoLinkClick}
+                    />
+                </div>
+            </CellMeasurer>
+        return content;
+    }
+
     render() {
         return (
             <div
@@ -158,28 +218,18 @@ export class MessageList extends Component {
                     ref={this.loadRef}
                     onScroll={this.onScroll}
                     className='rce-mlist'>
-                    {
-                        this.props.dataSource.map((x, i) => (
-                            <MessageBox
-                                key={i}
-                                {...x}
-                                onOpen={this.props.onOpen && ((e) => this.onOpen(x, i, e))}
-                                onPhotoError={this.props.onPhotoError && ((e) => this.onPhotoError(x, i, e))}
-                                onDownload={this.props.onDownload && ((e) => this.onDownload(x, i, e))}
-                                onTitleClick={this.props.onTitleClick && ((e) => this.onTitleClick(x, i, e))}
-                                onForwardClick={this.props.onForwardClick && ((e) => this.onForwardClick(x, i, e))}
-                                onReplyClick={this.props.onReplyClick && ((e) => this.onReplyClick(x, i, e))}
-                                onReplyMessageClick={this.props.onReplyMessageClick && ((e) => this.onReplyMessageClick(x, i, e))}
-                                onClick={this.props.onClick && ((e) => this.onClick(x, i, e))}
-                                onContextMenu={this.props.onContextMenu && ((e) => this.onContextMenu(x, i, e))}
-                                onMeetingMoreSelect={this.props.onMeetingMoreSelect && ((e) => this.onMeetingMoreSelect(x, i, e))}
-                                onMessageFocused={this.props.onMessageFocused && ((e) => this.onMessageFocused(x, i, e))}
-                                onMeetingMessageClick={this.props.onMeetingMessageClick && ((e) => this.onMeetingMessageClick(x, i, e))}
-                                onMeetingTitleClick={this.props.onMeetingTitleClick}
-                                onMeetingVideoLinkClick={this.props.onMeetingVideoLinkClick}
-                            />
-                        ))
-                    }
+                        <AutoSizer>
+                            {({height, width}) => (
+                                <Masonry
+                                cellCount={this.props.dataSource.length}
+                                cellMeasurerCache={cache}
+                                cellPositioner={cellPositioner}
+                                cellRenderer={(e) => this.Row(e)}
+                                height={height}
+                                width={width}
+                                />
+                            )}
+                        </AutoSizer>
                 </div>
                 {
                     this.props.downButton === true &&
